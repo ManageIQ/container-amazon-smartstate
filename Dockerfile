@@ -11,6 +11,6 @@ WORKDIR /opt/manageiq/amazon-smartstate
 
 RUN echo 'gem: --no-ri --no-rdoc --no-document' > /root/.gemrc && \
     gem install bundler && \
-    bundle install
+    bundle install --jobs=8
 
 CMD bundle exec amazon_ssa_agent
