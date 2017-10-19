@@ -6,7 +6,7 @@ FROM manageiq/ruby:latest
 RUN yum -y install --setopt=tsflags=nodocs gcc-c++ git postgresql-devel && \
     yum clean all
 
-COPY docker-assets/* /opt/manageiq/amazon-smartstate
+COPY docker-assets/* /opt/manageiq/amazon-smartstate/
 WORKDIR /opt/manageiq/amazon-smartstate
 
 RUN gem install bundler && \
