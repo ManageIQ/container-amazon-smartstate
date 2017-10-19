@@ -10,6 +10,6 @@ COPY docker-assets/* /opt/manageiq/amazon-smartstate/
 WORKDIR /opt/manageiq/amazon-smartstate
 
 RUN gem install bundler && \
-    bundle update
+    bundle install
 
 CMD bundle exec amazon_ssa_agent
