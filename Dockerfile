@@ -9,7 +9,8 @@ RUN yum -y install --setopt=tsflags=nodocs gcc-c++ git postgresql-devel && \
 COPY docker-assets/* /opt/manageiq/amazon-smartstate/
 WORKDIR /opt/manageiq/amazon-smartstate
 
-RUN gem install bundler && \
+RUN echo 'gem: --no-ri --no-rdoc --no-document' > /root/.gemrc && \
+    gem install bundler && \
     bundle install
 
 CMD bundle exec amazon_ssa_agent
