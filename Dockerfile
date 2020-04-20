@@ -2,8 +2,7 @@ FROM manageiq/ruby:latest
 
 # gcc-c++ for unf_ext gem
 # git for git based gems
-# postgresql-devel for pg gem (required by manageiq-gems-pending)
-RUN yum -y install --setopt=tsflags=nodocs gcc-c++ git postgresql-devel && \
+RUN yum -y install --setopt=tsflags=nodocs gcc-c++ git && \
     yum clean all
 
 COPY docker-assets/* /opt/manageiq/amazon-smartstate/
