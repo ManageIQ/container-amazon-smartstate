@@ -4,7 +4,7 @@ gem "manageiq-gems-pending", :git => "https://github.com/ManageIQ/manageiq-gems-
 gem "manageiq-smartstate", "~> 0.3.1"
 
 # Modified gems for vmware_web_service.  Setting sources here since they are git references
-gem "handsoap", "~>0.2.5", :require => false, :git => "https://github.com/ManageIQ/handsoap.git", :tag => "v0.2.5-5"
+gem "handsoap", "=0.2.5.5", :require => false, :source => "http://rubygems.manageiq.org"
 
 # Load other additional Gemfiles
 #   Developers can create a file ending in .rb under bundler.d/ to specify additional development dependencies
