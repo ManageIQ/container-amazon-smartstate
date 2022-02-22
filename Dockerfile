@@ -9,6 +9,7 @@ RUN dnf -y --disableplugin=subscription-manager install --setopt=tsflags=nodocs 
       libxslt \
       ruby && \
     dnf clean all && \
+    rm -rf /var/cache/dnf && \
     echo 'gem: --no-ri --no-rdoc --no-document' > /root/.gemrc && \
     gem install bundler
 
