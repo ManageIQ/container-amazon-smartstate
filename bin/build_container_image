@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REGISTRY=${REGISTRY:-"docker.io"}
+ORGANIZATION=${ORGANIZATION:-"manageiq"}
+DEFAULT_TAG="latest"
+[ "$GITHUB_EVENT_NAME" == "push" -a "$GITHUB_REF_NAME" != "master" ] && \
+  DEFAULT_TAG="$DEFAULT_TAG-${GITHUB_REF_NAME/\//-}"
+TAG=${TAG:-"$DEFAULT_TAG"}
+DEFAULT_IMAGE_NAME=$REGISTRY/$ORGANIZATION/amazon-smartstate:$TAG
+IMAGE_NAME=${IMAGE_NAME:-"$DEFAULT_IMAGE_NAME"}
+
+set -e
+
+docker build . -t $IMAGE_NAME
+
+[[ -z "$REGISTRY_USERNAME" ]] && exit 0
+
+echo "$REGISTRY_PASSWORD" | docker login $REGISTRY -u $REGISTRY_USERNAME --password-stdin
+
+docker push $IMAGE_NAME
+
+set +e
