@@ -1,10 +1,9 @@
-FROM registry.access.redhat.com/ubi8 as base
+FROM registry.access.redhat.com/ubi9 as base
 
 ENV app_root=/opt/manageiq/amazon-smartstate
 
-RUN dnf -y --disableplugin=subscription-manager module enable ruby:2.7
-
-RUN dnf -y --disableplugin=subscription-manager install --setopt=tsflags=nodocs \
+RUN dnf -y --disableplugin=subscription-manager module enable ruby:3.1 && \
+    dnf -y --disableplugin=subscription-manager install --setopt=tsflags=nodocs \
       libxml2 \
       libxslt \
       ruby && \
