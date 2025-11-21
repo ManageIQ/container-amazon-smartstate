@@ -15,7 +15,7 @@ jobs:
       if: "${{ github.ref == 'refs/heads/master' && github.repository_owner == 'ManageIQ'
         }}"
       run: |
-        echo "REGISTRY_USERNAME=${{ secrets.REGISTRY_USERNAME }}" >> $GITHUB_ENV
-        echo "REGISTRY_PASSWORD=${{ secrets.REGISTRY_PASSWORD }}" >> $GITHUB_ENV
+        echo "REGISTRY_USERNAME=${{ secrets.DOCKER_REGISTRY_USERNAME }}" >> $GITHUB_ENV
+        echo "REGISTRY_PASSWORD=${{ secrets.DOCKER_REGISTRY_PASSWORD }}" >> $GITHUB_ENV
     - name: Run container build script
       run: bin/build_container_image
