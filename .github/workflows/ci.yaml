@@ -1,19 +1,25 @@
----
 name: CI
 on:
-  push:
   pull_request:
-  workflow_dispatch:
+  push:
+    branches-ignore:
+    - dependabot/*
+    - renovate/*
   schedule:
   - cron: 0 0 * * 0
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
     - name: Set up registry credentials
-      if: "${{ github.ref == 'refs/heads/master' && github.repository_owner == 'ManageIQ'
-        }}"
+      if: "${{ github.ref == 'refs/heads/master' && github.repository_owner == 'ManageIQ' }}"
       run: |
         echo "REGISTRY_USERNAME=${{ secrets.DOCKER_REGISTRY_USERNAME }}" >> $GITHUB_ENV
         echo "REGISTRY_PASSWORD=${{ secrets.DOCKER_REGISTRY_PASSWORD }}" >> $GITHUB_ENV
